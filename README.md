@@ -1,4 +1,4 @@
-# GudangKu - Aesthetic Inventory Management System 🌸
+# GudangKu - Aesthetic Inventory Management System
 
 Web aplikasi manajemen inventaris modern yang dibangun dengan **Laravel**, didesain untuk memenuhi standar estetika tinggi dan persyaratan tugas akhir (Authorization Using Policy).
 
