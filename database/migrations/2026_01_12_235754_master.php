@@ -36,6 +36,28 @@ return new class extends Migration
             $table->decimal('price', 15, 2);
             $table->timestamps();
         });
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->enum('role', ['admin', 'staff'])->default('staff'); // Role-based Access Control
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('transactions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->enum('type', ['in', 'out']);
+            $table->integer('quantity');
+            $table->date('date');
+            $table->text('notes')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -46,5 +68,7 @@ return new class extends Migration
         Schema::dropIfExists('categories');
         Schema::dropIfExists('suppliers');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('transactions');
     }
 };

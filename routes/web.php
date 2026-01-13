@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,4 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+
+    // Transaction Routes
+    Route::get('/riwayat-transaksi', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/data-keluar-masuk', [TransactionController::class, 'stockReport'])->name('transactions.stock');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
 });
